@@ -1,0 +1,137 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+    "name": "AWS",
+    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+    // "image": "mcr.microsoft.com/devcontainers/python:0-3.9",
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "dockerComposeFile": [
+        "../compose.yaml"
+    ],
+    "service": "app",
+    "waitFor": "onCreateCommand",
+    "postCreateCommand": "pip3 install --user -r requirements.txt",
+    // Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+    "remoteUser": "vscode",
+    "features": {
+        "ghcr.io/devcontainers/features/aws-cli:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/dotnet:1": {},
+        // "ghcr.io/devcontainers-contrib/features/localstack:2": {},
+        "ghcr.io/customink/codespaces-features/sam-cli:1": {}
+    },
+    // "forwardPorts": [
+    //     5000
+    // ],
+    "workspaceFolder": "/workspaces/AWS",
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspaces/AWS,type=bind,consistency=cached"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // Microsoft Official
+                "ms-vscode.remote-repositories",
+                "ms-vscode.vs-keybindings",
+                "ms-vsliveshare.vsliveshare-pack",
+                "ms-edgedevtools.vscode-edge-devtools",
+                "ms-vscode.live-server",
+                "visualstudioexptteam.vscodeintellicode",
+                "visualstudioexptteam.intellicode-api-usage-examples",
+                // GitHub
+                "github.codespaces",
+                "github.copilot",
+                "github.github-vscode-theme",
+                "github.remotehub",
+                "github.vscode-pull-request-github",
+                // Common
+                "editorconfig.editorconfig",
+                "vscode-icons-team.vscode-icons",
+                "alexcvzz.vscode-sqlite",
+                "donjayamanne.githistory",
+                "esbenp.prettier-vscode",
+                "qwtel.sqlite-viewer",
+                // Markdown
+                // "DavidAnson.vscode-markdownlint",
+                "redhat.vscode-yaml",
+                "bierner.github-markdown-preview",
+                "shd101wyy.markdown-preview-enhanced",
+                "streetsidesoftware.code-spell-checker",
+                "yzhang.markdown-all-in-one",
+                // Python
+                // "donjayamanne.python-extension-pack"
+                "donjayamanne.python-environment-manager",
+                "kevinrose.vsc-python-indent",
+                "ms-python.autopep8",
+                "ms-python.pylint",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
+                "njpwerner.autodocstring",
+                // aws toolkit
+                "amazonwebservices.aws-toolkit-vscode"
+            ],
+            "settings": {
+                "editor.accessibilitySupport": "on",
+                "editor.formatOnPaste": true,
+                "editor.formatOnSave": true,
+                "editor.formatOnType": true,
+                "editor.inlineSuggest.enabled": true,
+                "editor.linkedEditing": true,
+                "editor.rulers": [
+                    120
+                ],
+                "editor.unicodeHighlight.nonBasicASCII": false,
+                "files.autoSave": "onFocusChange",
+                "files.insertFinalNewline": true,
+                "files.trimTrailingWhitespace": true,
+                "github.copilot.enable": {
+                    "*": true,
+                    "yaml": true,
+                    "plaintext": true,
+                    "markdown": true
+                },
+                "javascript.format.semicolons": "insert",
+                "notebook.lineNumbers": "on",
+                // "python.formatting.autopep8Args": [
+                //     "--ignore",
+                //     "E402"
+                // ],
+                "typescript.format.semicolons": "insert",
+                "window.commandCenter": true,
+                "window.menuBarVisibility": "classic",
+                "workbench.colorTheme": "GitHub Light Colorblind (Beta)",
+                "[markdown]": {
+                    "editor.defaultFormatter": "esbenp.prettier-vscode"
+                },
+                "[json]": {
+                    "editor.defaultFormatter": "vscode.json-language-features"
+                },
+                "[jsonc]": {
+                    "editor.defaultFormatter": "vscode.json-language-features"
+                },
+                "[typescript]": {
+                    "editor.defaultFormatter": "vscode.typescript-language-features"
+                },
+                "[html]": {
+                    "editor.defaultFormatter": "vscode.html-language-features"
+                },
+                "[scss]": {
+                    "editor.defaultFormatter": "vscode.css-language-features"
+                },
+                "[javascript]": {
+                    "editor.defaultFormatter": "vscode.typescript-language-features"
+                },
+                "[css]": {
+                    "editor.defaultFormatter": "vscode.css-language-features"
+                },
+                "[python]": {
+                    "editor.defaultFormatter": "ms-python.autopep8",
+                    "editor.formatOnType": true
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+services:
+  app:
+    # image: "mcr.microsoft.com/devcontainers/python:0-3.10"
+    image: "mcr.microsoft.com/devcontainers/python"
+    # ports:
+    #   - 3000:3000
+    environment:
+      - AWS_ACCESS_KEY_ID=foo
+      - AWS_SECRET_ACCESS_KEY=bar
+      - AWS_REGION=us-west-2
+      - AWS_ENDPOINT=http://localstack:4566
+      - DYNAMODB_ENDPOINT=http://dynamodb:8000
+    depends_on:
+      - localstack
+      - dynamodb
+    stdin_open: true
+    networks:
+      - awsnet
+
+  localstack:
+    image: localstack/localstack
+    ports:
+      - 4566:4566
+      - 4510-4559:4510-4559
+    environment:
+      - SERVICES=sqs
+      - DEFAULT_REGION=us-west-2
+    volumes:
+      - "localstack:/tmp/localstack"
+    networks:
+      - awsnet
+
+  dynamodb:
+    image: amazon/dynamodb-local
+    ports:
+      - 8000:8000
+    volumes:
+      - "dynamodb:/home/dynamodblocal/data"
+    networks:
+      - awsnet
+
+volumes:
+  localstack:
+  dynamodb:
+
+
+networks:
+  awsnet:
+    driver: bridge
